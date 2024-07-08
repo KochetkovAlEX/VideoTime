@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="{% static 'style/reg_style.css' %}">
+</head>
+<body>
+
+{% if not user.is_authenticated %}
+<header>Log In</header>
+    <form action="." method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Log in" class="login_btn"/>
+    </form>
+{% else %}
+<header>Вы авторизованы</header>
+<form action="{%url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="login_btn">Log Out</button>
+</form>
+{% endif %}
+</body>
+</html>

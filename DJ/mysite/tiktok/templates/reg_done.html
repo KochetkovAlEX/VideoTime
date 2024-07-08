@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'style/reg_style.css'%}">
+    <title>REG_DONE</title>
+</head>
+<body>
+<header>
+    <div class="title"><h1>Здравствуйте, {{new_user.username}}</h1></div>
+</header>
+<p>Вы успешно создали аккаунт. Теперь вы можете войти в него: <a href="{% url 'login' %}">Log In</a>.</p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'style/reg_style.css'%}">
+    <title>REG</title>
+</head>
+<body>
+
+<header>
+    <div class="title"><h1>Sign In</h1></div>
+</header>
+{% if not user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    <p><input type="submit" value="Create my account"></p>
+</form>
+{% endif %}
+{% if user.is_authenticated %}
+<form action="{%url 'logout' %}" method="post">
+    {% csrf_token %}
+    <p>Вы авторизованы</p>
+    <button type="submit">Logout</button>
+</form>
+{% endif %}
+</body>
+</html>

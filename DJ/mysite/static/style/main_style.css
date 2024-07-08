@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF0078;
+    color: white
+}
+
+input{
+    width: 300px;
+    height: 25px;
+}
+
+.site_name{
+    background-color: none;
+    padding: 10px;
+    margin: 10px -10px 10px 10px;
+    position: relative;
+    right: 35vw;
+    font-size: 22px;
+    font-weight: 600;
+    border: 1px solid none;
+}
+
+.site_name:hover{
+    cursor: pointer;
+}
+
+.btn{
+    background-color: none;
+    padding: 10px;
+    margin: 10px -10px 10px 50px;
+    position: relative;
+    left: 30vw;
+    font-size: 18px;
+    font-weight: 600;
+    border: 1px solid none;
+}
+.btn:active{
+    background-color: #CC0078;
+}
+.btn:hover{
+    cursor: pointer;
+}
+
+
+
+article{
+    height: 89.9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    position: relative;
+    background-color: #3cb8e8;
+}
+
+video{
+    height: 580px;
+    width: 340px;
+    margin: 0 0 0 90px;
+}
+
+
+.actions{
+    height: 400px;
+    width: 75px;
+    display: flex;
+    /* background-color: lightgrey; */
+    flex-direction: column;
+    position: relative;
+    left: 1.5vw;
+    align-items: center;
+}
+
+
+.like_{
+    width: 60px;
+    height: 60px;
+    background-color: #3cb8e8;
+    border-radius: 30px;
+    /* border: 0px; */
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+
+.comm_{
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    font-size: 18px;
+    margin-bottom: 40px;   
+}
+
+
+.next_video{
+    width: 60px;
+    height: 60px;
+    background-color: #3cb8e8;
+    border-radius: 30px;
+    /* border: 0px; */
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+
+.comment_place{
+    display: none;
+    width: 350px;
+    height: 400px;
+    background-color: #CC0078;
+    position: fixed;
+    right: 9vw;
+    top: 23vh;
+    /* align-items: center; */
+    /* justify-content: center; */
+    text-align: center;
+    border-radius: 25px;
+    opacity: 0.8;
+    color: white;
+}

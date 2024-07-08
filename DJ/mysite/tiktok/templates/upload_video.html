@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Video📽️</title>
+    <link rel="stylesheet" href="{%static 'style/reg_style.css'%}">
+</head>
+<body>
+<header>
+    <div class="title"><h1>Upload Video Page📼</h1></div>
+</header>
+<form method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="login_btn">Upload</button>
+</form>
+{% comment %} <a href="{% url 'first' %}" style="text-decoration: none; color: white;"><div class="btn" >
+    Main Page
+</div></a>
+<a href="/profile/{{user_id}}" style="text-decoration: none; color: white;"><div class='btn'>
+    User Page
+</div></a> {% endcomment %}
+</body>
+</html>
