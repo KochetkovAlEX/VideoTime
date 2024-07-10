@@ -7,7 +7,7 @@ from django.core.validators import FileExtensionValidator
     
 class Video(models.Model):
     title = models.CharField(max_length=30)
-    video = models.FileField(null=True, upload_to='D:/pythonProject/DJ/mysite/media/', validators=[FileExtensionValidator(['mp4'])])
+    video = models.FileField(null=True, validators=[FileExtensionValidator(['mp4'])])
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.JSONField(default=dict, blank=True)
 
