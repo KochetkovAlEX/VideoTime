@@ -1,22 +1,18 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, Video
-from django.forms import modelform_factory
 from django import forms
 
 
 class CustomUserCreationForm(UserCreationForm):
-
     class Meta:
         model = CustomUser
         fields = ('name',)
 
 
 class CustomUserChangeForm(UserChangeForm):
-
     class Meta:
         model = CustomUser
         fields = ('name',)
-
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -25,15 +21,13 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('name', )
+        fields = ('name',)
 
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
-
-    # photo = forms.ImageField()
 
 
 class LoginForm(forms.Form):
