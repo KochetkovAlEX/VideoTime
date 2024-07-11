@@ -1,13 +1,12 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
 from django.core.validators import FileExtensionValidator
-
 from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    """Модель кастомного пользователя"""
     name = models.CharField(max_length=50, unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -23,6 +22,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Video(models.Model):
+    """Модель видеороликов"""
     title = models.CharField(max_length=30)
     video = models.FileField(null=True, validators=[FileExtensionValidator(['mp4'])])
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -30,6 +30,7 @@ class Video(models.Model):
 
 
 class Post(models.Model):
+    """Модель постов(комментариев)"""
     post = models.CharField(max_length=255, null=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     video = models.ForeignKey(Video, on_delete=models.CASCADE, blank=True, null=True)

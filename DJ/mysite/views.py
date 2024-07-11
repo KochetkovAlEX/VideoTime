@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .forms import UserRegistrationForm, LoginForm, VideoForm, PostForm
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
@@ -28,8 +28,8 @@ def main_page(request, id):
 
 def load_next_video(request):  # request нужен в данной функции, но Pycharm красит его в серый.
     """Выбирает случайное следующее видео"""
-    video = Video.objects.all().count()
-    next_video_id = random.randint(1, video)
+    video = Video.objects.all()
+    next_video_id = random.choice(video).id
     return redirect(f'/{next_video_id}')
 
 

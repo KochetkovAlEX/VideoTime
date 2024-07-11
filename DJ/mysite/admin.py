@@ -6,6 +6,7 @@ from .models import CustomUser, Video, Post
 
 
 class CustomUserAdmin(UserAdmin):
+    """Форма для отображения на сайте администрации"""
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser

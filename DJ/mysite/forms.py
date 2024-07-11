@@ -4,18 +4,21 @@ from django import forms
 
 
 class CustomUserCreationForm(UserCreationForm):
+    """Форма создания пользователя"""
     class Meta:
         model = CustomUser
         fields = ('name',)
 
 
 class CustomUserChangeForm(UserChangeForm):
+    """Форма изменения пользователя"""
     class Meta:
         model = CustomUser
         fields = ('name',)
 
 
 class UserRegistrationForm(forms.ModelForm):
+    """Форма регистрации"""
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
 
@@ -24,6 +27,7 @@ class UserRegistrationForm(forms.ModelForm):
         fields = ('name',)
 
     def clean_password2(self):
+        """Проверка на совпадение паролей"""
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
@@ -31,6 +35,7 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
+    """Форма логина"""
     class Meta:
         model = CustomUser
         fields = ('username', 'password')
@@ -40,6 +45,7 @@ class LoginForm(forms.Form):
 
 
 class VideoForm(forms.ModelForm):
+    """Форма для отправки видео"""
     class Meta:
         model = Video
         fields = ('title', 'video')
@@ -49,4 +55,5 @@ class VideoForm(forms.ModelForm):
 
 
 class PostForm(forms.Form):
+    """Форма для комментариев"""
     post = forms.Textarea()
