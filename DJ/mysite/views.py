@@ -26,7 +26,7 @@ def main_page(request, id):
     return render(request, main_page_template, context=context)
 
 
-def load_next_video(request):
+def load_next_video(request):  # request нужен в данной функции, но Pycharm красит его в серый.
     """Выбирает случайное следующее видео"""
     video = Video.objects.all().count()
     next_video_id = random.randint(1, video)
