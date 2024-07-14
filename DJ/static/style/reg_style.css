@@ -32,7 +32,10 @@ header{
 }
 
 form{
-    display: block;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* допиши декор для полей ввода, а то дичь какая-то */
@@ -60,9 +63,7 @@ input[type=submit]{
 
 p{  
     width: 400px;
-    position: relative;
     margin-top: 10px;
-    left: 610px;
     font-size: 18px;
     font-weight: 600;
 }

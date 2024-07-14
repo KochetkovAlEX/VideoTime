@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser, Video, Post
 
@@ -20,7 +19,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': ('name', 'password1', 'password2', 'is_staff', 'is_active')}
-        ),
+         ),
     )
     search_fields = ('name',)
     ordering = ('name',)

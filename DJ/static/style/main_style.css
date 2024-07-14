@@ -4,17 +4,12 @@
 }
 
 header{
-    height: 70px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #FF0078;
     color: white
-}
-
-input{
-    width: 300px;
-    height: 25px;
 }
 
 .site_name{
@@ -49,10 +44,8 @@ input{
     cursor: pointer;
 }
 
-
-
 article{
-    height: 89.9vh;
+    height: 811px;
     display: flex;
     justify-content: center;
     align-items: center;
