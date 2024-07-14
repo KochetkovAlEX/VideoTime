@@ -81,7 +81,7 @@ def load_user_page(request, user_id: int):
 
 
 def get_like(request, id: int):
-    """Веб-сервис, позволяющий ставить лайки на определенное видео по его id"""
+    """Функция, позволяющая ставить лайки на определенное видео по его id"""
     current_video = Video.objects.get(id=id)
     user_like_status(request, current_video).save()
     return redirect(f'/{id}')

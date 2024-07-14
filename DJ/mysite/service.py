@@ -25,7 +25,6 @@ def check_post_database(request, id) -> dict:
     context = get_all_data_from_database(request, id)
     if Post.objects.filter(video=context['video']) is not None:
         context['postform'] = Post.objects.filter(video=context['video'])
-        return context
     return context
 
 
