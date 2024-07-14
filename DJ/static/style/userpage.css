@@ -18,7 +18,7 @@ header{
 video{
     height: 580px;
     width: 320px;
-    margin: 0 0 0 780px;
+    margin: 0 0 0 590px;
 }
 
 aside{
@@ -53,6 +53,6 @@ aside{
     font-size: 18px;
     font-weight: 600;
     width: 310px;
-    margin: 0 0 0 780px;
+    margin: 0 0 0 590px;
     padding: 0 0 0 10px;
 }
