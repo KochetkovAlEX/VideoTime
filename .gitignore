@@ -1,10 +1,13 @@
 # ignored folders
 .venv
 /media/
+.idea
 
 # ignored files
 .env
-
+*.mp4
+*.pptx
+*.sqlite3
 # ignored py-files
 main.py
 
