@@ -1,0 +1,10 @@
+# ignored folders
+.venv
+/media/
+
+# ignored files
+.env
+
+# ignored py-files
+main.py
+
