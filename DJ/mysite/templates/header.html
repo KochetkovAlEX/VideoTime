@@ -1,0 +1,35 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'style/main_style.css'  %}">
+    <title>Video Time📷</title>
+</head>
+<body>
+<header>
+    <div class="site_name">Video Time📷</div>
+    {% if not user.is_authenticated %}
+    <a href="{% url 'login' %}" style="text-decoration: none; color: white;">
+        <div class="btn">
+            Log In
+        </div>
+    </a>
+    <a href="{% url 'reg_page' %}" style="text-decoration: none; color: white;">
+        <div class="btn">
+            Sign In
+        </div>
+    </a>
+    {%else%}
+    <a href="{% url 'upload' %}" style="text-decoration: none; color: white;">
+        <div class="btn">
+            Upload Video
+        </div>
+    </a>
+    <a href="/profile/{{user_id}}" style="text-decoration: none; color: white;">
+        <div class='btn'>
+            {{user.name}}
+        </div>
+    </a>
+    {% endif %}
+
+</header>

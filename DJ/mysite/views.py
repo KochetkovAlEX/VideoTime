@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from .models import CustomUser
 from .service import *
 from .template_name import *
+import random
 
 
 class SignUpView(generic.CreateView):
@@ -16,7 +17,7 @@ class SignUpView(generic.CreateView):
 
 
 def main_page(request, id):
-    """Веб-сервис, загружающий главную страницу"""
+    """Функция, загружающая главную страницу"""
     context = check_post_database(request, id)
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -25,6 +26,12 @@ def main_page(request, id):
             return render(request, main_page_template, context=context)
     return render(request, main_page_template, context=context)
 
+def load_header_page(request):
+    user = request.user
+    context = {
+        'user_id': user.id
+    }
+    return render(request, only_header_page, context=context)
 
 def load_next_video(request):  # request нужен в данной функции, но Pycharm красит его в серый.
     """Выбирает случайное следующее видео"""
@@ -34,7 +41,7 @@ def load_next_video(request):  # request нужен в данной функци
 
 
 def reg_page(request):
-    """Сервис для регистарции пользователя"""
+    """Функция для регистарции пользователя"""
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -46,7 +53,7 @@ def reg_page(request):
 
 
 def user_login(request):
-    """Веб-сервис для ауентификации пользователя"""
+    """Функция для ауентификации пользователя"""
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -58,20 +65,23 @@ def user_login(request):
 
 
 def upload_video(request):
-    """Веб-сервис загрузки видео на сайт"""
+    """Функция загрузки видео на сайт"""
     if request.method == 'POST':
         form = VideoForm(request.POST, request.FILES)
         if form.is_valid():
-            Video(title=form.cleaned_data['title'], video=form.cleaned_data['video'], user=request.user).save()
-            return redirect('first')
+            video_url = upload_video_to_cloud(form)
+            Video(title=form.cleaned_data['title'], video_url=video_url, user=request.user).save()
+            return redirect('header_page')
     else:
         form = VideoForm()
     return render(request, upload_video_template, {'form': form})
 
 
 def load_user_page(request, user_id: int):
-    """Веб-сервис для загрузки странциы пользователя по его id - user_id;
-        собиарет количество лайков на видео пользователя"""
+    """
+    Функция для загрузки странциы пользователя по его id - user_id;
+    собиарет количество лайков на видео пользователя
+    """
     user = CustomUser.objects.get(id=user_id)
     video = Video.objects.filter(user=user_id)
     like = []
@@ -84,4 +94,4 @@ def get_like(request, id: int):
     """Функция, позволяющая ставить лайки на определенное видео по его id"""
     current_video = Video.objects.get(id=id)
     user_like_status(request, current_video).save()
-    return redirect(f'/{id}')
+    # return redirect(f'/{id}')

@@ -12,9 +12,21 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()  # include .env file from BASE_DIR folder
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+# settings for yandex-cloud
+YANDEX_CLOUD_CONFIG = {
+    'access_key': env('YANDEX_ACCESS_KEY'),  # ← совпадает с .env!
+    'secret_key': env('YANDEX_SECRET_KEY'),   # ← совпадает с .env!
+    'bucket_name': env('YANDEX_BUCKET_NAME'),
+    'endpoint_url': env('YANDEX_ENDPOINT_URL', default='https://storage.yandexcloud.net'),
+    'region': env('YANDEX_REGION', default='ru-central1'),
+}
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'

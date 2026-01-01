@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from .models import Video, Post
+import boto3
+from .forms import VideoForm
+from django.conf import settings
+cloud_config = settings.YANDEX_CLOUD_CONFIG
 
 
 def get_all_data_from_database(request, id) -> dict:
@@ -50,14 +54,38 @@ def save_user(user_form):
 
 def authenticate_and_login_user(form, request):
     """Функция для ауентификации и авторизации пользователя.
-    принимает в себя форму, содержащую данные нового пользователя"""
+    Принимает в себя форму, содержащую данные нового пользователя"""
     cd = form.cleaned_data
     user = authenticate(username=cd['username'], password=cd['password'])
     if user is not None:
         if user.is_active:
             login(request, user)
-            user_login_successful = redirect('first')
+            user_login_successful = redirect('header_page')
             return user_login_successful
     else:
         invalid_login = HttpResponse('Invalid login')
         return invalid_login
+
+
+def upload_video_to_cloud(form: VideoForm):
+    """Функция загрузки данных """
+
+    vide_title = form.cleaned_data['title']
+
+    s3_client = boto3.client(
+        's3',
+        endpoint_url=cloud_config['endpoint_url'],
+        aws_access_key_id=cloud_config['access_key'],
+        aws_secret_access_key=cloud_config['secret_key'],
+        region_name=cloud_config['region']
+    )
+
+
+    s3_client.upload_fileobj(
+        form.cleaned_data['video'],  # файловый объект, а не путь
+        cloud_config['bucket_name'],  # имя bucket
+        vide_title
+    )
+
+    url = f"https://{cloud_config['bucket_name']}.storage.yandexcloud.net/{vide_title}"
+    return url
