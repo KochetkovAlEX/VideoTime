@@ -15,6 +15,9 @@ class SignUpView(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = reg_page_template
 
+def test_render(request):
+    return render(request, base_page)
+
 
 def main_page(request, id):
     """Функция, загружающая главную страницу"""
@@ -26,12 +29,13 @@ def main_page(request, id):
             return render(request, main_page_template, context=context)
     return render(request, main_page_template, context=context)
 
-def load_header_page(request):
-    user = request.user
-    context = {
-        'user_id': user.id
-    }
-    return render(request, only_header_page, context=context)
+# def load_header_page(request):
+#     """Тестовая функция"""
+#     user = request.user
+#     context = {
+#         'user_id': user.id
+#     }
+#     return render(request, only_header_page, context=context)
 
 def load_next_video(request):  # request нужен в данной функции, но Pycharm красит его в серый.
     """Выбирает случайное следующее видео"""

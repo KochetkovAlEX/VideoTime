@@ -36,9 +36,8 @@
 <article>
     <div class="video-player">
         {% if user.is_authenticated%}
-<!--        <video autoplay muted controls loop="loop" id='video' src="{{video.video_url}}">-->
-<!--        </video>-->
-        <h1>Зарегиструйтесь или Авторизуйтесь</h1>
+        <video autoplay muted controls loop="loop" id='video' src="{{video.video_url}}">
+        </video>
         {%else%}
         <video autoplay muted controls loop="loop" id='video' src="{% static 'video/reg_gif.mp4' %}">
         </video>
@@ -83,4 +82,3 @@
 </body>
 <script src="{% static 'script/script.js' %}">
 </script>
-</html>

@@ -49,8 +49,16 @@ class VideoForm(forms.ModelForm):
     class Meta:
         model = Video
         fields = ('title', 'video')
+  
 
-    title = forms.CharField(max_length=30)
+    title = forms.CharField(max_length=30, 
+                            widget=forms.TextInput(
+                                attrs={
+                                    'class':'uk-input uk-form-width-large',
+                                    'placeholder': 'Название'
+                                    }
+                                )
+                            )
     video = forms.FileField()
 
 
