@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
@@ -72,7 +73,7 @@ def load_user_page(request, user_id: int):
     video = Video.objects.filter(user=user_id)
     like = []
     for i in video:
-        like.append(list(i.likes.values()).count(True))
+        like.append(i.likes_set.count())
     return render(request, user_page_template, {"user": user, "video": video, "like": like})
 
 

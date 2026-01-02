@@ -30,7 +30,7 @@ class Video(models.Model):
     title = models.CharField(max_length=30, verbose_name='Название видео')
     video_url = models.URLField(null=True, max_length=500, verbose_name='Ссылка на облако')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Пользователь')
-    likes = models.JSONField(default=dict, blank=True, verbose_name='Лайки')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
 
     class Meta:
         verbose_name = 'видео'
@@ -40,9 +40,9 @@ class Video(models.Model):
         return self.title
 
 
-class Post(models.Model):
+class Comments(models.Model):
     """Модель постов(комментариев)"""
-    post = models.CharField(max_length=255, null=True, verbose_name='Текст комментария')
+    text = models.CharField(max_length=255, null=True, verbose_name='Текст комментария')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Пользователь')
     video = models.ForeignKey(Video, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Ссылка на видео')
 
@@ -51,4 +51,18 @@ class Post(models.Model):
         verbose_name_plural = 'Комментарии'
 
     def __str__(self):
-        return self.post
+        return self.text
+
+
+class Likes(models.Model):
+    """Модель лайков"""
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, verbose_name='Понравившееся видео')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Пользователь')
+
+
+    class Meta:
+        verbose_name = 'лайк'
+        verbose_name_plural = 'Лайки'
+
+    def __str__(self):
+        return f'{self.user} -> {self.video}'

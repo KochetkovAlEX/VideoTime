@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 
 from .forms import VideoForm
-from .models import Video, Post
+from .models import Video, Comments
 
 cloud_config = settings.YANDEX_CLOUD_CONFIG
 
@@ -30,8 +30,8 @@ def get_all_data_from_database(request, id) -> dict:
 def check_post_database(request, id) -> dict:
     """Функция для проверки существования комментариев к определенному видео"""
     context = get_all_data_from_database(request, id)
-    if Post.objects.filter(video=context['video']) is not None:
-        context['postform'] = Post.objects.filter(video=context['video'])
+    if Comments.objects.filter(video=context['video']) is not None:
+        context['postform'] = Comments.objects.filter(video=context['video'])
     return context
 
 

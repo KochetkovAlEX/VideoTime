@@ -18,7 +18,7 @@
                 <li><a href="{% url 'VideoTime:reg_page' %}"><strong>Sign In</strong></a></li>
                 {% else %}
                 <li><a href="{% url 'VideoTime:upload' %}"><strong>Upload Video</strong></a></li>
-                <li><a VideoTime:userpage href="{% url "" user.id %}"><strong>{{user.name}}</strong></a></li>
+                <li><a VideoTime:userpage href="{% url "VideoTime:userpage" user.id %}"><strong>{{user.name}}</strong></a></li>
                 <li><a href="{% url 'VideoTime:logout' %}"><strong>Log Out</strong></a></li>
                 {% endif %}
             </ul>

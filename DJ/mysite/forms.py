@@ -102,6 +102,6 @@ class VideoForm(forms.ModelForm):
         }))
 
 
-class PostForm(forms.Form):
+class CommentsForm(forms.Form):
     """Форма для комментариев"""
-    post = forms.Textarea()
+    text = forms.Textarea()

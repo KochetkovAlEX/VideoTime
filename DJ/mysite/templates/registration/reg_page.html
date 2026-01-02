@@ -31,7 +31,7 @@
     </div>
 </form>
 {% else %}
-<form action={% class="uk-form-stacked" enctype="multipart/form-data" method="post" url "VideoTime:logout" %}>
+<form action={% url "VideoTime:logout" %} class="uk-form-stacked" enctype="multipart/form-data" method="post">
 {% csrf_token %}
 <div>
     <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
