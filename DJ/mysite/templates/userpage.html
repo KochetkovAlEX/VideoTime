@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 {% load static %}
 {% load my_tags %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>User Page😊</title>
-    <link rel="stylesheet" href="{%static 'style/userpage.css'%}">
-</head>
-<body>
-<header>
-    <div class="title"><h1>
-        {{user.name}}🎥
-    </h1></div>
-</header>
+{% block title %}User Page😊{% endblock title %}
+{% block content %}
 <article>
     {% for i in video %}
     <div class="video-player">
@@ -25,17 +15,5 @@
     </div>
     {%endfor%}
 </article>
-<aside>
-    <a href="{% url 'VideoTime:upload' %}" style="text-decoration: none; color: white;"><div class="btn" >
-        Upload Video
-    </div></a>
-    <a href="{% url 'VideoTime:test_page' %}" style="text-decoration: none; color: white;"><div class="btn">
-        Main Page
-    </div></a>
-    <form action="{%url 'VideoTime:logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit" style='width: 160px; height: 20px; border: none; background-color: white;'><div class="btn">Log Out</div></button>
-    </form>
-</aside>
-</body>
-</html>
+{% endblock content %}
+

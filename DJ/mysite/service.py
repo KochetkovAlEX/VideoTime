@@ -47,7 +47,7 @@ def user_like_status(request, video) -> object:
 
 def save_user(user_form):
     """Функция сохранения пользователя по полученным из формы данным"""
-    return user_form.save()
+    return user_form.save_user()
 
 
 def authenticate_and_login_user(form, request):
@@ -58,11 +58,9 @@ def authenticate_and_login_user(form, request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            user_login_successful = redirect('test_page')
-            return user_login_successful
+            return redirect('VideoTime:main_page')
     else:
-        invalid_login = HttpResponse('Invalid login')
-        return invalid_login
+        return HttpResponse('Не получилось войти')
 
 
 def upload_video_to_cloud(form: VideoForm):

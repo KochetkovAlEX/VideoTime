@@ -8,9 +8,9 @@
     <title>{% block title %} Video Time📷 {% endblock title %}</title>
 </head>
 
-<body>
+<body class="uk-height-viewport uk-flex uk-flex-column">
     {% include "includes/header.html" %}
-    <main>{% block content %}{% endblock content %}</main>
+    <main class="uk-flex-1">{% block content %}{% endblock content %}</main>
     {% include "includes/footer.html" %}
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.21.0/js/uikit.min.js"></script>

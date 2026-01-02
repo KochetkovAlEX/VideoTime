@@ -29,13 +29,6 @@ def main_page(request, id):
             return render(request, main_page_template, context=context)
     return render(request, main_page_template, context=context)
 
-# def load_header_page(request):
-#     """Тестовая функция"""
-#     user = request.user
-#     context = {
-#         'user_id': user.id
-#     }
-#     return render(request, only_header_page, context=context)
 
 def load_next_video(request):  # request нужен в данной функции, но Pycharm красит его в серый.
     """Выбирает случайное следующее видео"""
@@ -49,8 +42,9 @@ def reg_page(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
-            new_user = save_user(user_form).save()
-            return render(request, reg_page_done_template, {'new_user': new_user})
+            new_user = save_user(user_form)
+            login(request, new_user)
+            return render(request, base_page, {'user': new_user})
     else:
         user_form = UserRegistrationForm()
     return render(request, reg_page_template, {'user_form': user_form})
@@ -75,7 +69,7 @@ def upload_video(request):
         if form.is_valid():
             video_url = upload_video_to_cloud(form)
             Video(title=form.cleaned_data['title'], video_url=video_url, user=request.user).save()
-            return redirect('header_page')
+            return redirect('VideoTime:main_page')
     else:
         form = VideoForm()
     return render(request, upload_video_template, {'form': form})

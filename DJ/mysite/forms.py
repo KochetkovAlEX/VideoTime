@@ -52,6 +52,16 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Пароли не совпадают')
         return cd['password2']
+    
+
+    def save_user(self, commit=True):
+        """Функция сохранения пользователя по полученным из формы данным"""
+        new_user = super().save(commit=False)
+        new_user.set_password(self.cleaned_data['password'])
+
+        if commit:
+            new_user.save()
+        return new_user
 
 
 class LoginForm(forms.Form):
