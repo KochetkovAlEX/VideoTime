@@ -15,6 +15,7 @@ urlpatterns = [
         name='logout'),
     path('upload_video/', views.upload_video, name='upload'),
     path("profile/<int:user_id>", views.load_user_page, name='userpage'),
+    path('video-delete/<int:video_id>', views.delete_video, name='delete_video')
     # path('likes/<int:id>', views.get_like, name='like'),
     # path('next_video/<int:id>', views.main_page, name='next_video')
 ]

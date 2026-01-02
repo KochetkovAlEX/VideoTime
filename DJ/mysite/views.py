@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import UserRegistrationForm, LoginForm, VideoForm, PostForm
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from .models import CustomUser
 from .service import *
 from .template_name import *
-import random
+
 
 
 class SignUpView(generic.CreateView):
@@ -17,24 +17,6 @@ class SignUpView(generic.CreateView):
 
 def test_render(request):
     return render(request, base_page)
-
-
-def main_page(request, id):
-    """Функция, загружающая главную страницу"""
-    context = check_post_database(request, id)
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            Post(post=request.POST.get('comment_place'), user=request.user, video=context['video']).save()
-            return render(request, main_page_template, context=context)
-    return render(request, main_page_template, context=context)
-
-
-def load_next_video(request):  # request нужен в данной функции, но Pycharm красит его в серый.
-    """Выбирает случайное следующее видео"""
-    video = Video.objects.all()
-    next_video_id = random.choice(video).id
-    return redirect(f'/{next_video_id}')
 
 
 def reg_page(request):
@@ -87,9 +69,38 @@ def load_user_page(request, user_id: int):
         like.append(list(i.likes.values()).count(True))
     return render(request, user_page_template, {"user": user, "video": video, "like": like})
 
+def delete_video(request, video_id: int):
+    """Функция для удаления видео по его id"""
+    video = get_object_or_404(Video, id=video_id)
+    if request.method == 'POST':
+        video.delete()
+        return redirect('VideoTime:userpage', user_id=request.user.id)
 
-def get_like(request, id: int):
-    """Функция, позволяющая ставить лайки на определенное видео по его id"""
-    current_video = Video.objects.get(id=id)
-    user_like_status(request, current_video).save()
-    # return redirect(f'/{id}')
+
+# def main_page(request, id):
+#     """Функция, загружающая главную страницу"""
+#     context = check_post_database(request, id)
+#     if request.method == 'POST':
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             Post(post=request.POST.get('comment_place'), user=request.user, video=context['video']).save()
+#             return render(request, main_page_template, context=context)
+#     return render(request, main_page_template, context=context)
+
+
+# def load_next_video(request):  # request нужен в данной функции, но Pycharm красит его в серый.
+#     """Выбирает случайное следующее видео"""
+#     video = Video.objects.all()
+#     next_video_id = random.choice(video).id
+#     return redirect(f'/{next_video_id}')
+
+
+# def get_like(request, id: int):
+#     """Функция, позволяющая ставить лайки на определенное видео по его id"""
+#     current_video = Video.objects.get(id=id)
+#     user_like_status(request, current_video).save()
+#     # return redirect(f'/{id}')
+
+
+
+

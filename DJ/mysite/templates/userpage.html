@@ -4,18 +4,6 @@
 
 {% block title %}User Page😊{% endblock title %}
 {% block content %}
-{% comment %} <article>
-    {% for i in video %}
-    <div class="video-player">
-        <video autoplay muted controls loop="loop" id='video' src="{{i.video_url}}">
-        </video>
-    </div>
-    <div class='like_part'>
-        Like: {{like|get:forloop.counter0}}
-    </div>
-    {%endfor%}
-</article> {% endcomment %}
-
 <div class="uk-container">
     <div class="uk-grid-small uk-child-width-1-3@m uk-grid" uk-grid>
         {% for i in video %}
@@ -41,7 +29,24 @@
                         <span uk-icon="icon: heart; ratio: 0.8"></span>
                         <span>{{ like|get:forloop.counter0 }}</span>
                     </div>
+                    <div class="uk-text-right">
+                        <button class="uk-button uk-button-danger uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Удалить</button>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <!--Модальное окно удаления-->
+        <div id="modal-example" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body">
+                <h2 class="uk-modal-title">Удалить Видео</h2>
+                <p>Вы точно хотите удалить видео?</p>
+                <form method="post" action="{% url 'VideoTime:delete_video' i.id %}">
+                    <p class="uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
+                        {% csrf_token %}
+                        <button class="uk-button uk-button-danger" type="submit">Удалить</button>
+                    </p>
+                </form>     
             </div>
         </div>
         {% endfor %}
