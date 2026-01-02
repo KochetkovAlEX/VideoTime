@@ -1,7 +1,7 @@
 # ignored folders
 .venv
 /media/
-.idea
+.idea/
 
 # ignored files
 .env
