@@ -1,11 +1,14 @@
 import random
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect
-from .models import Video, Post
+
 import boto3
-from .forms import VideoForm
 from django.conf import settings
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+from django.shortcuts import redirect
+
+from .forms import VideoForm
+from .models import Video, Post
+
 cloud_config = settings.YANDEX_CLOUD_CONFIG
 
 
@@ -75,7 +78,6 @@ def upload_video_to_cloud(form: VideoForm):
         aws_secret_access_key=cloud_config['secret_key'],
         region_name=cloud_config['region']
     )
-
 
     s3_client.upload_fileobj(
         form.cleaned_data['video'],  # файловый объект, а не путь

@@ -4,43 +4,43 @@
 
 {% block content %}
 {% if not user.is_authenticated %}
-<form method="post" enctype="multipart/form-data" class="uk-form-stacked">
+<form class="uk-form-stacked" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     <div>
         <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
             <div class="uk-card-badge uk-label">Регистрация</div>
             <h3 class="uk-card-title">
                 <strong>{{user_form.name}}</strong>
-            </h3> 
-            
+            </h3>
+
             <div class="uk-margin uk-form-controls">
                 <div uk-form-custom>
                     <strong>{{user_form.password}}</strong>
-                </div>                
+                </div>
             </div>
 
             <div class="uk-margin uk-form-controls">
                 <div uk-form-custom>
                     <strong>{{user_form.password2}}</strong>
-                </div>                
+                </div>
             </div>
-            <button type="submit" value="Log in" class="uk-button uk-button-primary uk-button-large">
+            <button class="uk-button uk-button-primary uk-button-large" type="submit" value="Log in">
                 <strong>Зарегистрироваться</strong>
             </button>
         </div>
-    </div>    
+    </div>
 </form>
 {% else %}
-<form method="post" enctype="multipart/form-data" class="uk-form-stacked" action={% url "VideoTime:logout" %}>
-    {% csrf_token %}
-    <div>
-        <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
-            <div class="uk-card-badge uk-label">Вторая Регистрация?</div>
-            <button type="submit" value="Log in" class="uk-button uk-button-primary uk-button-large">
-                <strong>Выйти</strong>
-            </button>
-        </div>
-    </div>    
+<form action={% class="uk-form-stacked" enctype="multipart/form-data" method="post" url "VideoTime:logout" %}>
+{% csrf_token %}
+<div>
+    <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
+        <div class="uk-card-badge uk-label">Вторая Регистрация?</div>
+        <button class="uk-button uk-button-primary uk-button-large" type="submit" value="Log in">
+            <strong>Выйти</strong>
+        </button>
+    </div>
+</div>
 </form>
 {% endif %}
 {% endblock content %}

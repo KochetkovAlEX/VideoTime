@@ -1,8 +1,8 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{%static 'style/main_style.css'  %}">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="{%static 'style/main_style.css'  %}" rel="stylesheet">
     <title>Video Time📷</title>
 </head>
 <body>
@@ -36,10 +36,10 @@
 <article>
     <div class="video-player">
         {% if user.is_authenticated%}
-        <video autoplay muted controls loop="loop" id='video' src="{{video.video_url}}">
+        <video autoplay controls id='video' loop="loop" muted src="{{video.video_url}}">
         </video>
         {%else%}
-        <video autoplay muted controls loop="loop" id='video' src="{% static 'video/reg_gif.mp4' %}">
+        <video autoplay controls id='video' loop="loop" muted src="{% static 'video/reg_gif.mp4' %}">
         </video>
         {%endif%}
     </div>
@@ -47,24 +47,24 @@
     <div class="actions">
         {% if user.is_authenticated%}
         <div class="like_video">
-            <form method=POST name='likes' action="/likes/{{cur_id}}">
+            <form action="/likes/{{cur_id}}" method=POST name='likes'>
                 {% csrf_token %}
-                <button id='like' class="like_" type="submit">❤️</button>
+                <button class="like_" id='like' type="submit">❤️</button>
             </form>
         </div>
         <div class="comment_video">
-            <button type="submit" class="comm_">💬</button>
+            <button class="comm_" type="submit">💬</button>
         </div>
         <div class="next_video">
             <a href="/{{next_id}}">
-                <button id='next_video' class="next_video" type="submit">⬇️</button>
+                <button class="next_video" id='next_video' type="submit">⬇️</button>
             </a>
         </div>
         {% endif %}
     </div>
 </article>
 
-<div id="comment" class="comment_place">
+<div class="comment_place" id="comment">
     <div class="posts">
         {% for i in postform %}
         <p>{{i.user.name}} : {{i.post}} </p>
@@ -73,7 +73,7 @@
     <div class="comments_div">
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="comment_place">
+            <input name="comment_place" type="text">
             <button type="submit">отправить</button>
         </form>
     </div>

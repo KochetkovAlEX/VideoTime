@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('mysite', '0005_video_post'),
     ]
@@ -62,12 +61,14 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='post',
             name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
         ),
         migrations.AlterField(
             model_name='post',
             name='video',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='mysite.video', verbose_name='Ссылка на видео'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    to='mysite.video', verbose_name='Ссылка на видео'),
         ),
         migrations.AlterField(
             model_name='video',
@@ -82,6 +83,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='video',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL,
+                                    verbose_name='Пользователь'),
         ),
     ]

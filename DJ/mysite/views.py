@@ -1,12 +1,12 @@
-from django.shortcuts import render, get_object_or_404
-from .forms import UserRegistrationForm, LoginForm, VideoForm, PostForm
-from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
+from django.views import generic
+
+from .forms import UserRegistrationForm, LoginForm
 from .models import CustomUser
 from .service import *
 from .template_name import *
-
 
 
 class SignUpView(generic.CreateView):
@@ -14,6 +14,7 @@ class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = reg_page_template
+
 
 def test_render(request):
     return render(request, base_page)
@@ -74,13 +75,13 @@ def load_user_page(request, user_id: int):
         like.append(list(i.likes.values()).count(True))
     return render(request, user_page_template, {"user": user, "video": video, "like": like})
 
+
 def delete_video(request, video_id: int):
     """Функция для удаления видео по его id"""
     video = get_object_or_404(Video, id=video_id)
     if request.method == 'POST':
         video.delete()
         return redirect('VideoTime:userpage', user_id=request.user.id)
-
 
 # def main_page(request, id):
 #     """Функция, загружающая главную страницу"""
@@ -105,7 +106,3 @@ def delete_video(request, video_id: int):
 #     current_video = Video.objects.get(id=id)
 #     user_like_status(request, current_video).save()
 #     # return redirect(f'/{id}')
-
-
-
-

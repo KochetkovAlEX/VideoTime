@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('mysite', '0004_remove_video_user_delete_post_delete_video'),
     ]
@@ -18,7 +17,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=30)),
-                ('video', models.FileField(null=True, upload_to='', validators=[django.core.validators.FileExtensionValidator(['mp4'])])),
+                ('video', models.FileField(null=True, upload_to='',
+                                           validators=[django.core.validators.FileExtensionValidator(['mp4'])])),
                 ('likes', models.JSONField(blank=True, default=dict)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
@@ -28,8 +28,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('post', models.CharField(max_length=255, null=True)),
-                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('video', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='mysite.video')),
+                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                           to=settings.AUTH_USER_MODEL)),
+                ('video', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                            to='mysite.video')),
             ],
         ),
     ]

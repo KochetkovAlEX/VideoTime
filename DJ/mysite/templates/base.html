@@ -2,16 +2,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.21.0/css/uikit.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'style/style.css'  %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.21.0/css/uikit.min.css" rel="stylesheet"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="{% static 'style/style.css'  %}" rel="stylesheet">
     <title>{% block title %} Video Time📷 {% endblock title %}</title>
 </head>
 
 <body class="uk-height-viewport uk-flex uk-flex-column">
-    {% include "includes/header.html" %}
-    <main class="uk-flex-1">{% block content %}{% endblock content %}</main>
-    {% include "includes/footer.html" %}
+{% include "includes/header.html" %}
+<main class="uk-flex-1">{% block content %}{% endblock content %}</main>
+{% include "includes/footer.html" %}
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.21.0/js/uikit.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.21.0/js/uikit-icons.min.js"></script>

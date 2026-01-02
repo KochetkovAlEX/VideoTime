@@ -14,11 +14,11 @@
                      style="aspect-ratio: 9 / 16; background: #000">
 
                     <video
-                        src="{{ i.video_url }}"
-                        muted
-                        loop
-                        playsinline
-                        uk-cover>
+                            loop
+                            muted
+                            playsinline
+                            src="{{ i.video_url }}"
+                            uk-cover>
                     </video>
 
                 </div>
@@ -30,7 +30,9 @@
                         <span>{{ like|get:forloop.counter0 }}</span>
                     </div>
                     <div class="uk-text-right">
-                        <button class="uk-button uk-button-danger uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Удалить</button>
+                        <button class="uk-button uk-button-danger uk-margin-small-right" type="button"
+                                uk-toggle="target: #modal-example">Удалить
+                        </button>
                     </div>
                 </div>
             </div>
@@ -40,13 +42,13 @@
             <div class="uk-modal-dialog uk-modal-body">
                 <h2 class="uk-modal-title">Удалить Видео</h2>
                 <p>Вы точно хотите удалить видео?</p>
-                <form method="post" action="{% url 'VideoTime:delete_video' i.id %}">
+                <form action="{% url 'VideoTime:delete_video' i.id %}" method="post">
                     <p class="uk-text-right">
                         <button class="uk-button uk-button-default uk-modal-close" type="button">Отмена</button>
                         {% csrf_token %}
                         <button class="uk-button uk-button-danger" type="submit">Удалить</button>
                     </p>
-                </form>     
+                </form>
             </div>
         </div>
         {% endfor %}

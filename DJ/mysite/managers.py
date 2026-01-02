@@ -5,6 +5,7 @@ class CustomUserManager(BaseUserManager):
     """
     Менеджер кастомной модели пользователя, где имя является уникальным идентификатором.
     """
+
     def create_user(self, name, password, **extra_fields):
         """
         Создает и возвращает пользователя с его именем и паролем

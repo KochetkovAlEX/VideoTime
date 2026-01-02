@@ -5,37 +5,37 @@
 {% block content %}
 
 {% if not user.is_authenticated %}
-<form method="post" enctype="multipart/form-data" class="uk-form-stacked">
+<form class="uk-form-stacked" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     <div>
         <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
             <div class="uk-card-badge uk-label">Войдите</div>
             <h3 class="uk-card-title">
                 <strong>{{form.username}}</strong>
-            </h3> 
-            
+            </h3>
+
             <div class="uk-margin uk-form-controls">
                 <div uk-form-custom>
                     <strong>{{form.password}}</strong>
-                </div>          
+                </div>
             </div>
-            <button type="submit" value="Log in" class="uk-button uk-button-primary uk-button-large">
+            <button class="uk-button uk-button-primary uk-button-large" type="submit" value="Log in">
                 <strong>Войти</strong>
             </button>
         </div>
-    </div>    
+    </div>
 </form>
 {% else %}
-<form method="post" enctype="multipart/form-data" class="uk-form-stacked" action="{%url 'VideoTime:logout' %}">
+<form action="{%url 'VideoTime:logout' %}" class="uk-form-stacked" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     <div>
         <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
             <div class="uk-card-badge uk-label">Уже авторизован</div>
-            <button type="submit" value="Log Out" class="uk-button uk-button-primary uk-button-large">
+            <button class="uk-button uk-button-primary uk-button-large" type="submit" value="Log Out">
                 <strong>Выйти</strong>
             </button>
         </div>
-    </div>    
+    </div>
 </form>
 {% endif %}
 
