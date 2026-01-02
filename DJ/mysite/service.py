@@ -47,9 +47,7 @@ def user_like_status(request, video) -> object:
 
 def save_user(user_form):
     """Функция сохранения пользователя по полученным из формы данным"""
-    new_user = user_form.save(commit=False)
-    new_user.set_password(user_form.cleaned_data['password'])
-    return new_user
+    return user_form.save()
 
 
 def authenticate_and_login_user(form, request):
@@ -60,7 +58,7 @@ def authenticate_and_login_user(form, request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            user_login_successful = redirect('header_page')
+            user_login_successful = redirect('test_page')
             return user_login_successful
     else:
         invalid_login = HttpResponse('Invalid login')

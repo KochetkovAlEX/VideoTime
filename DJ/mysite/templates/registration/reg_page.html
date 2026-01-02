@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Registration📝{% endblock title %}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<form method="post" enctype="multipart/form-data" class="uk-form-stacked">
+    {% csrf_token %}
+    <div>
+        <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
+            <div class="uk-card-badge uk-label">Регистрация</div>
+            <h3 class="uk-card-title">
+                <strong>{{user_form.name}}</strong>
+            </h3> 
+            
+            <div class="uk-margin uk-form-controls">
+                <div uk-form-custom>
+                    <strong>{{user_form.password}}</strong>
+                </div>                
+            </div>
+
+            <div class="uk-margin uk-form-controls">
+                <div uk-form-custom>
+                    <strong>{{user_form.password2}}</strong>
+                </div>                
+            </div>
+            <button type="submit" value="Log in" class="uk-button uk-button-primary uk-button-large">
+                <strong>Зарегистрироваться</strong>
+            </button>
+        </div>
+    </div>    
+</form>
+{% else %}
+<form method="post" enctype="multipart/form-data" class="uk-form-stacked" action={% url "logout" %}>
+    {% csrf_token %}
+    <div>
+        <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
+            <div class="uk-card-badge uk-label">Вторая Регистрация?</div>
+            <button type="submit" value="Log in" class="uk-button uk-button-primary uk-button-large">
+                <strong>Выйти</strong>
+            </button>
+        </div>
+    </div>    
+</form>
+{% endif %}
+{% endblock content %}

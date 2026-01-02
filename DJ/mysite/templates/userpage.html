@@ -26,13 +26,13 @@
     {%endfor%}
 </article>
 <aside>
-    <a href="{% url 'upload' %}" style="text-decoration: none; color: white;"><div class="btn" >
+    <a href="{% url 'VideoTime:upload' %}" style="text-decoration: none; color: white;"><div class="btn" >
         Upload Video
     </div></a>
-    <a href="{% url 'header_page' %}" style="text-decoration: none; color: white;"><div class="btn">
+    <a href="{% url 'VideoTime:test_page' %}" style="text-decoration: none; color: white;"><div class="btn">
         Main Page
     </div></a>
-    <form action="{%url 'logout' %}" method="post">
+    <form action="{%url 'VideoTime:logout' %}" method="post">
         {% csrf_token %}
         <button type="submit" style='width: 160px; height: 20px; border: none; background-color: white;'><div class="btn">Log Out</div></button>
     </form>

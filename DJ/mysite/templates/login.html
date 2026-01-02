@@ -1,26 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <title>LOGIN</title>
-    <link rel="stylesheet" href="{% static 'style/reg_style.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Login✏️{% endblock title %}
+
+{% block content %}
 
 {% if not user.is_authenticated %}
-<header>Log In</header>
-    <form action="." method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Log in" class="login_btn"/>
-    </form>
-{% else %}
-<header>Вы авторизованы</header>
-<form action="{%url 'logout' %}" method="post">
+<form method="post" enctype="multipart/form-data" class="uk-form-stacked">
     {% csrf_token %}
-    <button type="submit" class="login_btn">Log Out</button>
+    <div>
+        <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
+            <div class="uk-card-badge uk-label">Войдите</div>
+            <h3 class="uk-card-title">
+                <strong>{{form.username}}</strong>
+            </h3> 
+            
+            <div class="uk-margin uk-form-controls">
+                <div uk-form-custom>
+                    <strong>{{form.password}}</strong>
+                </div>          
+            </div>
+            <button type="submit" value="Log in" class="uk-button uk-button-primary uk-button-large">
+                <strong>Войти</strong>
+            </button>
+        </div>
+    </div>    
+</form>
+{% else %}
+<form method="post" enctype="multipart/form-data" class="uk-form-stacked" action="{%url 'logout' %}">
+    {% csrf_token %}
+    <div>
+        <div class="uk-card-large uk-card-default uk-position-center  uk-card-body uk-text-center">
+            <div class="uk-card-badge uk-label">Уже авторизован</div>
+            <button type="submit" value="Log Out" class="uk-button uk-button-primary uk-button-large">
+                <strong>Выйти</strong>
+            </button>
+        </div>
+    </div>    
 </form>
 {% endif %}
-</body>
-</html>
+
+{% endblock content %}

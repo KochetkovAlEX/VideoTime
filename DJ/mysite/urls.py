@@ -3,9 +3,10 @@ from . import views
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 
+app_name = "VideoTime"
 urlpatterns = [
     path('', views.test_render, name='test_page'),
-    path('', views.load_next_video, name='header_page'),
+    # path('', views.load_next_video, name='header_page'),
     # path('<int:id>/', views.main_page, name='index'),
     path('reg/', views.reg_page, name='reg_page'),
     path('login/', views.user_login, name='login'),

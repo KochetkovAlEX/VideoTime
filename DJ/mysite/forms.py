@@ -19,8 +19,28 @@ class CustomUserChangeForm(UserChangeForm):
 
 class UserRegistrationForm(forms.ModelForm):
     """Форма регистрации"""
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'uk-input uk-form-width-large', 
+            'placeholder': 'Пароль'}
+            )
+        )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'uk-input uk-form-width-large',
+                'placeholder': 'Повторите Пароль'
+                }
+        )
+    )
+    name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": 'uk-input uk-form-width-large', 
+                'placeholder': 'Имя пользователя'
+            }
+        )
+    )
 
     class Meta:
         model = CustomUser
@@ -30,7 +50,7 @@ class UserRegistrationForm(forms.ModelForm):
         """Проверка на совпадение паролей"""
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
-            raise forms.ValidationError('Passwords don\'t match.')
+            raise forms.ValidationError('Пароли не совпадают')
         return cd['password2']
 
 
@@ -40,8 +60,8 @@ class LoginForm(forms.Form):
         model = CustomUser
         fields = ('username', 'password')
 
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": 'uk-input uk-form-width-large', 'placeholder': 'Имя пользователя'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'uk-input uk-form-width-large', 'placeholder': 'Пароль'}))
 
 
 class VideoForm(forms.ModelForm):
@@ -54,12 +74,17 @@ class VideoForm(forms.ModelForm):
     title = forms.CharField(max_length=30, 
                             widget=forms.TextInput(
                                 attrs={
-                                    'class':'uk-input uk-form-width-large',
+                                    'class':'uk-input uk-form-width-medium',
                                     'placeholder': 'Название'
                                     }
                                 )
                             )
-    video = forms.FileField()
+    video = forms.FileField(
+        widget=forms.FileInput(attrs={
+            'class': 'uk-input uk-form-width-medium',
+            'style': 'cursor: pointer;',
+            'placeholder': 'Выберите файл'
+        }))
 
 
 class PostForm(forms.Form):
