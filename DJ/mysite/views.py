@@ -69,7 +69,7 @@ def upload_video(request):
         if form.is_valid():
             video_url = upload_video_to_cloud(form)
             Video(title=form.cleaned_data['title'], video_url=video_url, user=request.user).save()
-            return redirect('VideoTime:main_page')
+            return redirect('VideoTime:upload')
     else:
         form = VideoForm()
     return render(request, upload_video_template, {'form': form})
