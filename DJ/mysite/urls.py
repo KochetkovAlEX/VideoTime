@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 from django.conf import settings
-from django.contrib.auth import views as auth_views
 
 app_name = "VideoTime"
 
@@ -11,8 +10,7 @@ urlpatterns = [
     # path('<int:id>/', views.main_page, name='index'),
     path('reg/', views.reg_page, name='reg_page'),
     path('login/', views.user_login, name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='index.html', next_page=settings.LOGOUT_REDIRECT_URL),
-        name='logout'),
+    path('logout/', views.logout_view, name='logout'),
     path('upload_video/', views.upload_video, name='upload'),
     path("profile/<int:user_id>", views.load_user_page, name='userpage'),
     path('video-delete/<int:video_id>', views.delete_video, name='delete_video')

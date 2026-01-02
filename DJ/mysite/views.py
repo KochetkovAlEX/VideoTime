@@ -19,6 +19,11 @@ def test_render(request):
     return render(request, base_page)
 
 
+def logout_view(request):
+    logout(request)
+    return redirect('VideoTime:main_page')
+
+
 def reg_page(request):
     """Функция для регистарции пользователя"""
     if request.method == 'POST':

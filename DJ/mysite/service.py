@@ -1,6 +1,6 @@
 import random
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .models import Video, Post
 import boto3
